@@ -600,28 +600,10 @@
     <div class="entry-sub">Content Video Editor</div>
     <div class="entry-btns">
       <button class="entry-btn-main" id="enterWithSound">✦ Portfolio</button>
-      <button class="entry-btn-silent" id="enterSilent">Enter without sound</button>
+      
     </div>
     <div class="entry-loading" id="entryLoading">Loading audio...</div>
   </div>
-</div>
-
-<!-- LOFI PLAYER -->
-<div class="lofi-player">
-  <div class="lofi-card" id="lofiCard">
-    <div class="lofi-disc" id="lofiDisc">🎵</div>
-    <div class="lofi-info">
-      <div class="lofi-title">Lofi Chill Beats</div>
-      <div class="lofi-sub">chill beats to edit to</div>
-    </div>
-    <div class="lofi-bars" id="lofiBars">
-      <div class="lofi-bar"></div>
-      <div class="lofi-bar"></div>
-      <div class="lofi-bar"></div>
-      <div class="lofi-bar"></div>
-    </div>
-  </div>
-  <button class="lofi-btn" id="lofiBtn" title="Play/Pause">🎵</button>
 </div>
 
 <script>
@@ -661,7 +643,7 @@ createMatrix(document.getElementById('matrixFooterCanvas'));
 createMatrix(document.getElementById('entryMatrix'));
 
 // ─── AUDIO PLAYER ───
-const TRACK_URL = 'https://cdn.pixabay.com/audio/2022/05/27/audio_1808fbf07a.mp3';
+
 
 let audio = null;
 let playing = false;
