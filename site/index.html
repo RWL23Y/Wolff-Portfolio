@@ -606,24 +606,6 @@
   </div>
 </div>
 
-<!-- LOFI PLAYER -->
-<div class="lofi-player">
-  <div class="lofi-card" id="lofiCard">
-    <div class="lofi-disc" id="lofiDisc">🎵</div>
-    <div class="lofi-info">
-      <div class="lofi-title">Lofi Chill Beats</div>
-      <div class="lofi-sub">chill beats to edit to</div>
-    </div>
-    <div class="lofi-bars" id="lofiBars">
-      <div class="lofi-bar"></div>
-      <div class="lofi-bar"></div>
-      <div class="lofi-bar"></div>
-      <div class="lofi-bar"></div>
-    </div>
-  </div>
-  <button class="lofi-btn" id="lofiBtn" title="Play/Pause">🎵</button>
-</div>
-
 <script>
 // ─── MATRIX EFFECT ───
 const CHARS = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホ∑∆∏√∞≠αβγδεζη'.split('');
@@ -660,69 +642,7 @@ createMatrix(document.getElementById('matrixCanvas'));
 createMatrix(document.getElementById('matrixFooterCanvas'));
 createMatrix(document.getElementById('entryMatrix'));
 
-// ─── AUDIO PLAYER ───
-const TRACK_URL = 'https://cdn.pixabay.com/audio/2022/05/27/audio_1808fbf07a.mp3';
 
-let audio = null;
-let playing = false;
-
-const entryScreen    = document.getElementById('entryScreen');
-const enterWithSound = document.getElementById('enterWithSound');
-const enterSilent    = document.getElementById('enterSilent');
-const entryLoading   = document.getElementById('entryLoading');
-const lofiBtn        = document.getElementById('lofiBtn');
-const lofiCard       = document.getElementById('lofiCard');
-const lofiDisc       = document.getElementById('lofiDisc');
-const lofiBars       = document.getElementById('lofiBars');
-
-function startAudio() {
-  audio = new Audio(TRACK_URL);
-  audio.loop = true;
-  audio.volume = 0.08;
-  audio.play().catch(() => {});
-  playing = true;
-  lofiDisc.classList.add('playing');
-  lofiBars.classList.remove('paused');
-  lofiBtn.textContent = '⏸';
-  lofiBtn.classList.add('active');
-  lofiCard.classList.add('visible');
-}
-
-function hideEntry() {
-  entryScreen.classList.add('hidden');
-}
-
-enterWithSound.addEventListener('click', () => {
-  entryLoading.style.display = 'block';
-  enterWithSound.disabled = true;
-  setTimeout(() => { hideEntry(); startAudio(); }, 400);
-});
-
-enterSilent.addEventListener('click', () => {
-  hideEntry();
-  lofiCard.classList.add('visible');
-  setTimeout(() => lofiCard.classList.remove('visible'), 3000);
-});
-
-lofiBtn.addEventListener('click', () => {
-  if (!audio) {
-    startAudio();
-  } else if (playing) {
-    audio.pause();
-    playing = false;
-    lofiDisc.classList.remove('playing');
-    lofiBars.classList.add('paused');
-    lofiBtn.textContent = '🎵';
-    lofiBtn.classList.remove('active');
-  } else {
-    audio.play().catch(() => {});
-    playing = true;
-    lofiDisc.classList.add('playing');
-    lofiBars.classList.remove('paused');
-    lofiBtn.textContent = '⏸';
-    lofiBtn.classList.add('active');
-  }
-});
 </script>
 </body>
 </html>
