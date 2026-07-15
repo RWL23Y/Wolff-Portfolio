@@ -53,7 +53,7 @@ a { text-decoration: none; color: inherit; }
 .orb-2 { width: 350px; height: 350px; background: radial-gradient(circle, rgba(155,92,255,0.07) 0%, transparent 70%); bottom: 60px; left: 8%; }
 .hero-inner { display: grid; grid-template-columns: 280px 1fr; gap: 2rem; align-items: start; width: 100%; max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
 
-/* ── HERO TITLE BLOCK (above grid) ── */
+/* ── HERO TITLE BLOCK ── */
 .hero-title-block { max-width: 1200px; margin: 0 auto 2rem; position: relative; z-index: 1; }
 .hero-eyebrow { font-family: var(--font-head); font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 0.5rem; }
 .hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--accent); }
@@ -64,13 +64,7 @@ a { text-decoration: none; color: inherit; }
 .hero-exp-num { font-family: var(--font-head); font-size: 26px; font-weight: 800; color: var(--text); line-height: 1; }
 .hero-exp-num span { color: var(--accent); }
 .hero-exp-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
-.hero-pill {
-  background: transparent; border: 1px solid var(--border);
-  border-radius: 50px; padding: 10px 22px;
-  font-family: var(--font-head); font-size: 12px; font-weight: 700;
-  letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
-  display: flex; align-items: center; gap: 8px;
-}
+.hero-pill { background: transparent; border: 1px solid var(--border); border-radius: 50px; padding: 10px 22px; font-family: var(--font-head); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 8px; }
 .hero-pill-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); animation: blink 2s ease infinite; }
 @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
 
@@ -91,13 +85,11 @@ a { text-decoration: none; color: inherit; }
 .tools-grid { display: flex; gap: 16px; flex-wrap: wrap; }
 .tool-icon-wrap { display: flex; flex-direction: column; align-items: center; gap: 5px; transition: transform .2s; }
 .tool-icon-wrap:hover { transform: translateY(-3px); }
-.tool-icon-wrap img { width: 44px; height: 44px; border-radius: 10px; display: block; transition: filter .2s; }
-.tool-icon-wrap:hover img { filter: drop-shadow(0 4px 10px rgba(155,92,255,0.35)); }
 .tool-icon-wrap span { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
 .btn-primary { background: var(--accent); color: #fff; padding: 12px 28px; border-radius: 50px; font-size: 13px; font-weight: 600; transition: background .2s, transform .15s; display: inline-block; }
 .btn-primary:hover { background: var(--accent-dim); transform: translateY(-2px); }
 
-/* ── FEATURED VIDEO (right) ── */
+/* ── FEATURED VIDEO ── */
 .hero-right { display: flex; flex-direction: column; }
 .featured-video-wrap { position: relative; isolation: isolate; background: var(--bg2); border: 1px solid transparent; border-radius: 16px; overflow: hidden; }
 .featured-iframe-wrap { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; }
@@ -115,7 +107,14 @@ a { text-decoration: none; color: inherit; }
 .thumb-item:hover { transform: scale(1.03); }
 .thumb-item.active { box-shadow: 0 0 0 2px var(--accent); }
 
-/* ── ANIMATED PURPLE BORDER (shared) ── */
+/* ── ANIMATED BORDER ── */
+@property --border-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+@keyframes border-angle-spin { to { --border-angle: 360deg; } }
+
 .profile-card::before,
 .connect-card::before,
 .tools-card::before,
@@ -165,40 +164,13 @@ a { text-decoration: none; color: inherit; }
 .short-nav-btn:hover { border-color: var(--accent); background: var(--accent-subtle); }
 
 /* ── CLIENT CHANNELS ── */
-@property --border-angle {
-  syntax: '<angle>';
-  inherits: false;
-  initial-value: 0deg;
-}
 .clients-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-.client-card {
-  position: relative;
-  background: var(--bg2);
-  border: 1px solid transparent;
-  border-radius: 16px;
-  padding: 1.5rem 1rem 1.2rem;
-  display: flex; flex-direction: column; align-items: center; gap: 6px;
-  transition: transform .2s;
-  cursor: pointer;
-  isolation: isolate;
-}
-.client-card::before {
-  content: '';
-  position: absolute;
-  inset: -1.5px;
-  border-radius: 17px;
-  padding: 1.5px;
-  background: conic-gradient(from var(--border-angle), transparent 0%, transparent 65%, var(--accent) 85%, #E0CCFF 92%, var(--accent) 97%, transparent 100%);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  mask-composite: exclude;
-  animation: border-angle-spin 4s linear infinite;
-  z-index: -1;
-}
+.client-card { position: relative; background: var(--bg2); border: 1px solid transparent; border-radius: 16px; padding: 1.5rem 1rem 1.2rem; display: flex; flex-direction: column; align-items: center; gap: 6px; transition: transform .2s; cursor: pointer; isolation: isolate; }
+.client-card::before { content: ''; position: absolute; inset: -1.5px; border-radius: 17px; padding: 1.5px; background: conic-gradient(from var(--border-angle), transparent 0%, transparent 65%, var(--accent) 85%, #E0CCFF 92%, var(--accent) 97%, transparent 100%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; animation: border-angle-spin 4s linear infinite; z-index: -1; }
 .client-card:hover { transform: translateY(-4px); }
 .client-card:hover::before { animation-duration: 1.6s; }
-@keyframes border-angle-spin { to { --border-angle: 360deg; } }
+.client-avatar { width: 72px; height: 72px; border-radius: 50%; background: var(--bg3); overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 4px; }
+.client-avatar img { width: 100%; height: 100%; object-fit: cover; }
 .client-name { font-family: var(--font-head); font-size: 13px; font-weight: 700; text-align: center; }
 .client-subs { font-size: 11px; color: var(--muted); text-align: center; }
 
@@ -255,7 +227,6 @@ a { text-decoration: none; color: inherit; }
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
 
-  <!-- BIG TITLE -->
   <div class="hero-title-block">
     <div class="hero-eyebrow">Content Video Editor</div>
     <div class="hero-name">W<span class="ac">olff</span></div>
@@ -302,39 +273,32 @@ a { text-decoration: none; color: inherit; }
         <div class="connect-label">Tools</div>
         <div class="tools-grid">
           <div class="tool-icon-wrap">
-            <img src="assets/premiere-pro.png" alt="Premiere Pro" width="44" height="44">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="9" fill="#2D0054"/><text x="8" y="30" font-family="Arial Black" font-size="18" font-weight="900" fill="#9999FF">Pr</text></svg>
             <span>Premiere Pro</span>
           </div>
           <div class="tool-icon-wrap">
-            <img src="assets/after-effects.png" alt="After Effects" width="44" height="44">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="9" fill="#2D0054"/><text x="6" y="30" font-family="Arial Black" font-size="17" font-weight="900" fill="#9999FF">Ae</text></svg>
             <span>After Effects</span>
           </div>
           <div class="tool-icon-wrap">
-            <img src="assets/photoshop.png" alt="Photoshop" width="44" height="44">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="9" fill="#001E36"/><text x="6" y="30" font-family="Arial Black" font-size="17" font-weight="900" fill="#31A8FF">Ps</text></svg>
             <span>Photoshop</span>
           </div>
         </div>
       </div>
-
     </div>
 
-    <!-- RIGHT — FEATURED VIDEO com YouTube embed real -->
+    <!-- RIGHT — FEATURED VIDEO -->
     <div class="hero-right">
       <div class="featured-video-wrap">
         <div class="featured-iframe-wrap">
-          <!--
-            Troque o VIDEO_ID abaixo pelo ID do seu vídeo do YouTube.
-            Ex: https://www.youtube.com/watch?v=ABC123 → VIDEO_ID = ABC123
-          -->
-          <iframe
-            id="featuredPlayer"
+          <iframe id="featuredPlayer"
             src="https://www.youtube.com/embed/tfj9UAwcrYM?enablejsapi=1&rel=0&modestbranding=1"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen>
-          </iframe>
+            allowfullscreen></iframe>
         </div>
         <div class="featured-video-info">
-          <div class="fv-cat">Long Form</div>
+          <div class="fv-cat" id="featuredCat">Short Form</div>
           <div class="fv-row">
             <div>
               <div class="fv-title" id="featuredTitle">Your Best Video Title Here</div>
@@ -342,9 +306,7 @@ a { text-decoration: none; color: inherit; }
             </div>
             <a href="https://www.youtube.com/watch?v=tfj9UAwcrYM" class="fv-open-btn" id="featuredLink" target="_blank">Open on YouTube</a>
           </div>
-          <div class="thumbs-strip" id="thumbsStrip">
-            <!-- Thumbnails gerados via JS -->
-          </div>
+          <div class="thumbs-strip" id="thumbsStrip"></div>
         </div>
       </div>
     </div>
@@ -356,11 +318,9 @@ a { text-decoration: none; color: inherit; }
   <div class="shorts-inner">
     <div class="section-eyebrow">Short Form</div>
     <h2 class="section-title" style="margin-bottom:2rem;">Reels & <span class="dim">Shorts</span></h2>
-
     <div class="shorts-carousel-wrap">
       <div class="shorts-track" id="shortsTrack"></div>
     </div>
-
     <div class="shorts-nav">
       <button class="short-nav-btn" id="prevShort">‹</button>
       <button class="short-nav-btn" id="nextShort">›</button>
@@ -374,9 +334,9 @@ a { text-decoration: none; color: inherit; }
     <div class="section-eyebrow">Collaborations</div>
     <h2 class="section-title" style="margin-bottom:2rem;">Client <span class="dim">Channels</span></h2>
     <div class="clients-grid">
-      <a href="#" class="client-card" target="_blank"><div class="client-name">Channel 1</div><div class="client-subs">—</div></a>
-      <a href="#" class="client-card" target="_blank"><div class="client-name">Channel 2</div><div class="client-subs">—</div></a>
-      <a href="#" class="client-card" target="_blank"><div class="client-name">Channel 3</div><div class="client-subs">—</div></a>
+      <a href="#" class="client-card" target="_blank"><div class="client-avatar">🎬</div><div class="client-name">Channel 1</div><div class="client-subs">—</div></a>
+      <a href="#" class="client-card" target="_blank"><div class="client-avatar">📱</div><div class="client-name">Channel 2</div><div class="client-subs">—</div></a>
+      <a href="#" class="client-card" target="_blank"><div class="client-avatar">🎞️</div><div class="client-name">Channel 3</div><div class="client-subs">—</div></a>
     </div>
   </div>
 </section>
@@ -397,7 +357,7 @@ a { text-decoration: none; color: inherit; }
     <div class="entry-name">W<em>olff</em></div>
     <div class="entry-sub">Content Video Editor</div>
     <div class="entry-btns">
-      <button class="entry-btn-main" id="enterSite">Portfolio</button>
+      <button class="entry-btn-main" id="enterSite">✦ Apresento meu Portfólio</button>
     </div>
   </div>
 </div>
@@ -433,20 +393,19 @@ createMatrix(document.getElementById('matrixFooterCanvas'));
 createMatrix(document.getElementById('entryMatrix'));
 createMatrix(document.getElementById('matrixFullCanvas'));
 
-// ── FEATURED VIDEO THUMBNAILS ──
-// Adicione aqui os IDs e títulos dos seus vídeos
+// ── FEATURED VIDEOS ──
+// Troque os IDs e títulos pelos seus vídeos reais
 const videos = [
-  { id: 'tfj9UAwcrYM', title: 'Your Best Video Title Here', desc: 'Full edit focused on retention and pacing.', cat: 'Long Form' },
-  { id: 'tfj9UAwcrYM', title: 'Video Title 2', desc: 'Color grading + storytelling cuts.', cat: 'Long Form' },
-  { id: 'tfj9UAwcrYM', title: 'Video Title 3', desc: 'Creative transitions and sound design.', cat: 'Long Form' },
-  { id: 'tfj9UAwcrYM', title: 'Video Title 4', desc: 'Full-length client project.', cat: 'Long Form' },
+  { id: 'tfj9UAwcrYM', title: 'Your Best Video Title Here', desc: 'Editing focused on retention and hooks.', cat: 'Short Form' },
+  { id: 'IFAs8l-Ri2I', title: 'Your Second Video Title', desc: 'Creative cuts and sound design.', cat: 'Short Form' },
 ];
 let currentVideo = 0;
 const featuredPlayer = document.getElementById('featuredPlayer');
-const featuredTitle = document.getElementById('featuredTitle');
-const featuredDesc = document.getElementById('featuredDesc');
-const featuredLink = document.getElementById('featuredLink');
-const thumbsStrip = document.getElementById('thumbsStrip');
+const featuredTitle  = document.getElementById('featuredTitle');
+const featuredDesc   = document.getElementById('featuredDesc');
+const featuredCat    = document.getElementById('featuredCat');
+const featuredLink   = document.getElementById('featuredLink');
+const thumbsStrip    = document.getElementById('thumbsStrip');
 
 function buildThumbs() {
   thumbsStrip.innerHTML = '';
@@ -463,20 +422,20 @@ function switchVideo(i) {
   const v = videos[i];
   featuredPlayer.src = `https://www.youtube.com/embed/${v.id}?enablejsapi=1&rel=0&modestbranding=1&autoplay=1`;
   featuredTitle.textContent = v.title;
-  featuredDesc.textContent = v.desc;
+  featuredDesc.textContent  = v.desc;
+  featuredCat.textContent   = v.cat;
   featuredLink.href = `https://www.youtube.com/watch?v=${v.id}`;
   document.querySelectorAll('.thumb-item').forEach((t,j) => t.classList.toggle('active', j===i));
 }
 buildThumbs();
 
 // ── SHORTS CAROUSEL ──
-// Troque os IDs abaixo pelos IDs dos seus vídeos (parte após ?v= ou /shorts/)
+// ✅ Novo short adicionado: IFAs8l-Ri2I
 const shortsVideos = [
   { id: 'tfj9UAwcrYM', title: 'Short 1' },
-  { id: 'tfj9UAwcrYM', title: 'Short 2' },
-  { id: 'tfj9UAwcrYM', title: 'Short 3' },
+  { id: 'IFAs8l-Ri2I', title: 'Short 2' },  // ← NOVO SHORT
 ];
-let activeShort = 1;
+let activeShort = 0;
 const track = document.getElementById('shortsTrack');
 
 function buildShortCard(v, i) {
@@ -501,7 +460,7 @@ function updateShorts() {
     c.classList.toggle('active', isActive);
     const wrap = c.querySelector('.short-iframe-wrap');
     if (isActive) {
-      wrap.innerHTML = `<iframe src="https://www.youtube.com/embed/${shortsVideos[i].id}?enablejsapi=1&rel=0&modestbranding=1&autoplay=1&mute=1&playlist=${shortsVideos[i].id}&loop=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+      wrap.innerHTML = `<iframe src="https://www.youtube.com/embed/${shortsVideos[i].id}?enablejsapi=1&rel=0&modestbranding=1&autoplay=1&mute=1&loop=1&playlist=${shortsVideos[i].id}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
     } else {
       wrap.innerHTML = `<img src="https://img.youtube.com/vi/${shortsVideos[i].id}/hqdefault.jpg" alt="${shortsVideos[i].title}">`;
     }
@@ -519,95 +478,64 @@ document.getElementById('nextShort').addEventListener('click', () => {
 });
 
 // ── ENTRY ──
-function hideEntry() { document.getElementById('entryScreen').classList.add('hidden'); }
-document.getElementById('enterSite').addEventListener('click', hideEntry);
+document.getElementById('enterSite').addEventListener('click', () => {
+  document.getElementById('entryScreen').classList.add('hidden');
+});
 
-// ── PURPLE LIGHTNING BACKGROUND ──
+// ── LIGHTNING ──
 (function () {
   const canvas = document.getElementById('lightningCanvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   let W, H, bolts = [];
-
-  function resize() {
-    W = canvas.width = window.innerWidth + 120;
-    H = canvas.height = window.innerHeight + 120;
-  }
-  window.addEventListener('resize', resize);
-  resize();
-
-  // Midpoint-displacement jagged bolt generator
-  function buildBolt(x1, y1, x2, y2, displace, segments) {
-    segments = segments || [{ x: x1, y: y1 }, { x: x2, y: y2 }];
+  function resize() { W = canvas.width = window.innerWidth + 120; H = canvas.height = window.innerHeight + 120; }
+  window.addEventListener('resize', resize); resize();
+  function buildBolt(x1,y1,x2,y2,displace,segments) {
+    segments = segments || [{x:x1,y:y1},{x:x2,y:y2}];
     if (displace < 2) return segments;
     const result = [];
-    for (let i = 0; i < segments.length - 1; i++) {
-      const a = segments[i], b = segments[i + 1];
-      const mx = (a.x + b.x) / 2 + (Math.random() - 0.5) * displace;
-      const my = (a.y + b.y) / 2 + (Math.random() - 0.5) * displace * 0.4;
-      result.push(a, { x: mx, y: my });
+    for (let i=0;i<segments.length-1;i++) {
+      const a=segments[i],b=segments[i+1];
+      const mx=(a.x+b.x)/2+(Math.random()-0.5)*displace;
+      const my=(a.y+b.y)/2+(Math.random()-0.5)*displace*0.4;
+      result.push(a,{x:mx,y:my});
     }
-    result.push(segments[segments.length - 1]);
-    return buildBolt(0, 0, 0, 0, displace * 0.55, result);
+    result.push(segments[segments.length-1]);
+    return buildBolt(0,0,0,0,displace*0.55,result);
   }
-
   function spawnBolt() {
-    const startX = Math.random() * W;
-    const endX = startX + (Math.random() - 0.5) * W * 0.5;
-    const endY = H * (0.35 + Math.random() * 0.55);
-    const path = buildBolt(startX, 0, endX, endY, 110, null);
-
-    const branches = [];
-    if (path.length > 4 && Math.random() > 0.3) {
-      const bi = Math.floor(path.length * (0.3 + Math.random() * 0.3));
-      const bStart = path[bi];
-      const bEnd = { x: bStart.x + (Math.random() - 0.5) * 200, y: bStart.y + Math.random() * (H - bStart.y) * 0.6 };
-      branches.push(buildBolt(bStart.x, bStart.y, bEnd.x, bEnd.y, 60, null));
+    const startX=Math.random()*W, endX=startX+(Math.random()-0.5)*W*0.5, endY=H*(0.35+Math.random()*0.55);
+    const path=buildBolt(startX,0,endX,endY,110,null);
+    const branches=[];
+    if (path.length>4&&Math.random()>0.3) {
+      const bi=Math.floor(path.length*(0.3+Math.random()*0.3));
+      const bStart=path[bi],bEnd={x:bStart.x+(Math.random()-0.5)*200,y:bStart.y+Math.random()*(H-bStart.y)*0.6};
+      branches.push(buildBolt(bStart.x,bStart.y,bEnd.x,bEnd.y,60,null));
     }
-    bolts.push({ path, branches, life: 1, decay: 0.03 + Math.random() * 0.02, midX: (startX + endX) / 2, midY: endY * 0.4 });
+    bolts.push({path,branches,life:1,decay:0.03+Math.random()*0.02,midX:(startX+endX)/2,midY:endY*0.4});
   }
-
-  function drawBoltPath(pts, alpha, width) {
-    ctx.beginPath();
-    ctx.moveTo(pts[0].x, pts[0].y);
-    for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i].x, pts[i].y);
-    ctx.strokeStyle = `rgba(224,204,255,${alpha})`;
-    ctx.lineWidth = width;
-    ctx.shadowColor = '#9B5CFF';
-    ctx.shadowBlur = 45;
-    ctx.stroke();
+  function drawPath(pts,alpha,width) {
+    ctx.beginPath(); ctx.moveTo(pts[0].x,pts[0].y);
+    for (let i=1;i<pts.length;i++) ctx.lineTo(pts[i].x,pts[i].y);
+    ctx.strokeStyle=`rgba(224,204,255,${alpha})`; ctx.lineWidth=width;
+    ctx.shadowColor='#9B5CFF'; ctx.shadowBlur=45; ctx.stroke();
   }
-
   function loop() {
-    ctx.clearRect(0, 0, W, H);
-    bolts = bolts.filter(b => b.life > 0);
-    bolts.forEach(b => {
-      const a = Math.max(b.life, 0);
-
-      // ambient purple flash glow around the strike
-      const grad = ctx.createRadialGradient(b.midX, b.midY, 0, b.midX, b.midY, Math.max(W, H) * 0.5);
-      grad.addColorStop(0, `rgba(155,92,255,${a * 0.35})`);
-      grad.addColorStop(1, 'rgba(155,92,255,0)');
-      ctx.shadowBlur = 0;
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, W, H);
-
-      drawBoltPath(b.path, a * 0.85, 3);
-      b.branches.forEach(br => drawBoltPath(br, a * 0.55, 1.8));
-      b.life -= b.decay;
+    ctx.clearRect(0,0,W,H);
+    bolts=bolts.filter(b=>b.life>0);
+    bolts.forEach(b=>{
+      const a=Math.max(b.life,0);
+      const grad=ctx.createRadialGradient(b.midX,b.midY,0,b.midX,b.midY,Math.max(W,H)*0.5);
+      grad.addColorStop(0,`rgba(155,92,255,${a*0.35})`); grad.addColorStop(1,'rgba(155,92,255,0)');
+      ctx.shadowBlur=0; ctx.fillStyle=grad; ctx.fillRect(0,0,W,H);
+      drawPath(b.path,a*0.85,3); b.branches.forEach(br=>drawPath(br,a*0.55,1.8));
+      b.life-=b.decay;
     });
-    ctx.shadowBlur = 0;
-    requestAnimationFrame(loop);
+    ctx.shadowBlur=0; requestAnimationFrame(loop);
   }
   loop();
-
   function scheduleNext() {
-    const delay = 2500 + Math.random() * 4500;
-    setTimeout(() => {
-      spawnBolt();
-      if (Math.random() > 0.6) setTimeout(spawnBolt, 90 + Math.random() * 120);
-      scheduleNext();
-    }, delay);
+    setTimeout(()=>{ spawnBolt(); if(Math.random()>0.6) setTimeout(spawnBolt,90+Math.random()*120); scheduleNext(); }, 2500+Math.random()*4500);
   }
   scheduleNext();
 })();
