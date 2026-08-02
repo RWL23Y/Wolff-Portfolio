@@ -34,23 +34,14 @@ a { text-decoration: none; color: inherit; }
 .matrix-banner { position: relative; height: 80px; overflow: hidden; background: #000; border-bottom: 2px solid var(--accent-border); z-index: 100; }
 .matrix-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 
-/* ── FLOATING CONTACT ── */
-.float-contact {
-  position: fixed; top: 20px; right: 24px; z-index: 200;
-  background: var(--accent); color: #fff; border: none;
-  padding: 10px 22px; border-radius: 50px;
-  font-family: var(--font-head); font-size: 13px; font-weight: 700;
-  cursor: pointer; box-shadow: 0 4px 20px var(--accent-glow);
-  transition: background .2s, transform .15s; display: inline-block;
-}
-.float-contact:hover { background: var(--accent-dim); transform: scale(1.04); }
+/* ── FLOATING CONTACT (removed) ── */
 
 /* ── HERO ── */
 .hero { padding: 60px 6% 70px; position: relative; overflow: hidden; }
 .orb { position: absolute; border-radius: 50%; pointer-events: none; }
 .orb-1 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(155,92,255,0.11) 0%, transparent 70%); top: -150px; right: -150px; }
 .orb-2 { width: 350px; height: 350px; background: radial-gradient(circle, rgba(155,92,255,0.07) 0%, transparent 70%); bottom: 60px; left: 8%; }
-.hero-inner { display: grid; grid-template-columns: 280px 1fr; gap: 2rem; align-items: start; width: 100%; max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+.hero-inner { display: grid; grid-template-columns: 360px 1fr; gap: 2rem; align-items: start; width: 100%; max-width: 1300px; margin: 0 auto; position: relative; z-index: 1; }
 
 /* ── HERO TITLE BLOCK ── */
 .hero-title-block { max-width: 1200px; margin: 0 auto 2rem; position: relative; z-index: 1; }
@@ -106,34 +97,20 @@ a { text-decoration: none; color: inherit; }
 .thumb-item:hover { transform: scale(1.03); }
 .thumb-item.active { box-shadow: 0 0 0 2px var(--accent); }
 
-/* ── ANIMATED BORDER ── */
-@property --border-angle {
-  syntax: '<angle>';
-  inherits: false;
-  initial-value: 0deg;
-}
-@keyframes border-angle-spin { to { --border-angle: 360deg; } }
+/* ── STATIC BORDER ── */
+.profile-card { border: 1px solid var(--border) !important; }
+.connect-card { border: 1px solid var(--border) !important; }
+.tools-card { border: 1px solid var(--border) !important; }
+.featured-video-wrap { border: 1px solid var(--border) !important; }
+.thumb-item { border: 1px solid var(--border) !important; }
+.short-card { border: 1px solid var(--border) !important; }
 
 .profile-card::before,
 .connect-card::before,
 .tools-card::before,
 .featured-video-wrap::before,
 .thumb-item::before,
-.short-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1.5px;
-  background: conic-gradient(from var(--border-angle), transparent 0%, transparent 60%, #3B1566 75%, #5C2D91 85%, #7B3FE4 92%, #5C2D91 97%, transparent 100%);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  mask-composite: exclude;
-  animation: border-angle-spin 4s linear infinite;
-  z-index: 3;
-  pointer-events: none;
-}
+.short-card::before { display: none; }
 
 /* ── SECTION ── */
 .section { padding: 80px 6%; }
@@ -165,9 +142,8 @@ a { text-decoration: none; color: inherit; }
 /* ── CLIENT CHANNELS ── */
 .clients-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 .client-card { position: relative; background: var(--bg2); border: 1px solid transparent; border-radius: 16px; padding: 1.5rem 1rem 1.2rem; display: flex; flex-direction: column; align-items: center; gap: 6px; transition: transform .2s; cursor: pointer; isolation: isolate; }
-.client-card::before { content: ''; position: absolute; inset: -1.5px; border-radius: 17px; padding: 1.5px; background: conic-gradient(from var(--border-angle), transparent 0%, transparent 60%, #3B1566 75%, #5C2D91 85%, #7B3FE4 92%, #5C2D91 97%, transparent 100%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; animation: border-angle-spin 4s linear infinite; z-index: -1; }
+.client-card::before { display: none; }
 .client-card:hover { transform: translateY(-4px); }
-.client-card:hover::before { animation-duration: 1.6s; }
 .client-avatar { width: 72px; height: 72px; border-radius: 50%; background: var(--bg3); overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 4px; }
 .client-avatar img { width: 100%; height: 100%; object-fit: cover; }
 .client-name { font-family: var(--font-head); font-size: 13px; font-weight: 700; text-align: center; }
@@ -217,8 +193,7 @@ a { text-decoration: none; color: inherit; }
   <canvas class="matrix-canvas" id="matrixCanvas"></canvas>
 </div>
 
-<!-- FLOATING CONTACT -->
-<a class="float-contact" href="mailto:rafaelwolffluizx@gmail.com" target="_blank">Contact</a>
+
 
 <!-- HERO -->
 <div class="hero">
@@ -229,6 +204,10 @@ a { text-decoration: none; color: inherit; }
     <div class="hero-eyebrow">Content Video Editor</div>
     <div class="hero-name">W<span class="ac">olff</span></div>
     <div class="hero-badge-row">
+      <div class="hero-exp">
+        <div class="hero-exp-num">2<span>+</span></div>
+        <div class="hero-exp-label">Years Experience</div>
+      </div>
       <div class="hero-pill">
         <div class="hero-pill-dot"></div>
         Open to Long &amp; Short Form
@@ -355,7 +334,7 @@ a { text-decoration: none; color: inherit; }
     <div class="entry-name">W<em>olff</em></div>
     <div class="entry-sub">Content Video Editor</div>
     <div class="entry-btns">
-      <button class="entry-btn-main" id="enterSite">✦ PØrtfØliØ</button>
+      <button class="entry-btn-main" id="enterSite">✦ Portfolio</button>
     </div>
   </div>
 </div>
